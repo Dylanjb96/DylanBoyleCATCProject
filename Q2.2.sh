@@ -30,4 +30,24 @@ echo "Whoami Command Output:" >> $output_file
 whoami >> $output_file
 echo "----------------------------------------" >> $output_file
 
+# Command 7: who
+echo "Who Command Output:" >> $output_file
+who >> $output_file
+echo "----------------------------------------" >> $output_file
 
+# Command 8: w
+echo "W Command Output:" >> $output_file
+w >> $output_file
+echo "----------------------------------------" >> $output_file
+
+# Command 9: top
+echo "Top Command Output:" >> $output_file
+top >> $output_file
+echo "----------------------------------------" >> $output_file
+
+# Command 10: history
+echo "History Command Output:" >> $output_file
+history >> $output_file
+echo "----------------------------------------" >> $output_file
+
+echo "All commands executed and output appended to file: $output_file"
