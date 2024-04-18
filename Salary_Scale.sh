@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/bin/bashi
+
+# Function to print a line separator
+print_separator() {
+    printf "+------+-----------------------+\n"
+}
 
 # Prompt the user to enter starting salary, number of points, and salary increment
 read -p "Enter starting salary: " starting_salary
@@ -26,4 +31,7 @@ for (( year=current_year; year<current_year+num_points; year++ )); do
     # Print year and corresponding salary scale
     printf "%4d | $%.2f\n" "$year" "$salary"
 done
+
+# Print footer
+print_separator
 
