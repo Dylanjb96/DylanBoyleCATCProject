@@ -40,6 +40,6 @@ for (( year=current_year; year<current_year+num_points; year++ )); do
 done
 
 # Print footer indicating the author with padding spaces
-echo "+---------------------------------------+"
+echo "+-------------------------------------------------------+"
 echo "|       Salary Scale Table program by Dylan Boyle       |"
-echo "+---------------------------------------+"
+echo "+-------------------------------------------------------+"
