@@ -7,7 +7,7 @@ print_separator() {
 
 # Function to print table header with spaces
 print_header() {
-    printf "| Year |    Salary Scale        |\n"
+    printf "| Year |    Salary Scale        |   January   |   July   |\n"
 }
 
 # Prompt the user to enter starting salary, number of points, and salary increment
@@ -34,9 +34,18 @@ print_separator
 current_year=$(date +%Y)
 for (( year=current_year; year<current_year+num_points; year++ )); do
     # Calculate salary for the current year
-    salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year")
-    # Print year and corresponding salary scale
-    printf "| %4d |    $%9.2f          |\n" "$year" "$salary"
+    if [[ "$is_manager" == "yes" ]]; then
+        if (( $(date +%m) <= 6 )); then
+            # Increment salary in January and July
+            salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year")
+        else
+            salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year + $increment")
+        fi
+    else
+        salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year")
+    fi
+    # Print year and corresponding salary scale for Jan and Ju
+    printf "| %4d |    $%9.2f          |\n" "$year" "$salary" "$salary"
 done
 
 # Print footer indicating the author with padding spaces
