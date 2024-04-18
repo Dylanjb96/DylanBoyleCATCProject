@@ -2,7 +2,7 @@
 output_file="DylanBoyle.txt"
 
 echo "Date Command Output:" >> $output_file
-date >> output_file
+date >> $output_file
 echo "----------------------------------------" >> $output_file
 
 # Command 2: hostname
@@ -51,3 +51,4 @@ history >> $output_file
 echo "----------------------------------------" >> $output_file
 
 echo "All commands executed and output appended to file: $output_file"
+
