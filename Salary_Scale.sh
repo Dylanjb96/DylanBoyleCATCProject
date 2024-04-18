@@ -2,12 +2,17 @@
 
 # Function to print a line separator
 print_separator() {
-    printf "+------+-----------------------+\n"
+    printf "+------+-----------------------+-----------------------+\n"
 }
 
 # Function to print table header with spaces
-print_header() {
-    printf "| Year |    Salary Scale        |   January   |   July   |\n"
+print_manager_header() {
+    printf "| Year |    Salary Scale        |    January    |    July    |\n"
+}
+
+# Function to print table header with spaces for employee
+print_employee_header() {
+    printf "| Year |    Salary Scale        |    January    |\n"
 }
 
 # Prompt the user to enter starting salary, number of points, and salary increment
@@ -27,28 +32,37 @@ fi
 
 # Print table header with spaces
 print_separator
-print_header
+
+if [[ "$is_manager" == "yes" ]]; then
+    print_manager_header
+else
+    print_employee_header
+fi
+
 print_separator
+
+# Initialize January and July salaries
+january_salary=$starting_salary
+july_salary=$(bc <<< "scale=2; $starting_salary + $increment / 2")
 
 # Calculate and display salary scales for each year
 current_year=$(date +%Y)
 for (( year=current_year; year<current_year+num_points; year++ )); do
-    # Calculate salary for the current year
+    # Print year, corresponding salary scale, January salary, and July salary for manager table
     if [[ "$is_manager" == "yes" ]]; then
-        if (( $(date +%m) <= 6 )); then
-            # Increment salary in January and July
-            salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year")
-        else
-            salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year + $increment")
-        fi
+        printf "| %4d |    $%9.2f          |    $%9.2f   |   $%9.2f   |\n" "$year" "$january_salary" "$january_salary" "$july_salary"
     else
-        salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year")
+        # Print year, corresponding salary scale, and January salary for employee table
+        printf "| %4d |    $%9.2f          |    $%9.2f   |\n" "$year" "$january_salary" "$january_salary"
     fi
-    # Print year and corresponding salary scale for Jan and Ju
-    printf "| %4d |    $%9.2f          |\n" "$year" "$salary" "$salary"
+    
+    # Increment January and July salaries
+    january_salary=$(bc <<< "scale=2; $january_salary + $increment")
+    july_salary=$(bc <<< "scale=2; $july_salary + $increment")
 done
 
 # Print footer indicating the author with padding spaces
-echo "+-------------------------------------------------------+"
-echo "|       Salary Scale Table program by Dylan Boyle       |"
-echo "+-------------------------------------------------------+"
+echo "+-------------------------------------------------------------------+"
+echo "|       Salary Scale Table program by Dylan Boyle                   |"
+echo "+-------------------------------------------------------------------+"
+
