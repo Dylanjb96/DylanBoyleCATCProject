@@ -2,17 +2,17 @@
 
 # Function to print a line separator
 print_separator() {
-    printf "+------+-----------------------+-----------------------+\n"
+    printf "+------+---------------------+-----------------+----------------+\n"
 }
 
 # Function to print table header with spaces
 print_manager_header() {
-    printf "| Year |    Salary Scale        |    January    |    July    |\n"
+    printf "| Year |    Salary Scale     |     January     |      July      |\n"
 }
 
 # Function to print table header with spaces for employee
 print_employee_header() {
-    printf "| Year |    Salary Scale        |    January    |\n"
+    printf "| Year |    Salary Scale     |    January      |\n"
 }
 
 # Prompt the user to enter starting salary, number of points, and salary increment
@@ -50,10 +50,10 @@ current_year=$(date +%Y)
 for (( year=current_year; year<current_year+num_points; year++ )); do
     # Print year, corresponding salary scale, January salary, and July salary for manager table
     if [[ "$is_manager" == "yes" ]]; then
-        printf "| %4d |    $%9.2f          |    $%9.2f   |   $%9.2f   |\n" "$year" "$january_salary" "$january_salary" "$july_salary"
+        printf "| %4d |    $%9.2f       |    $%9.2f   |   $%9.2f   |\n" "$year" "$january_salary" "$january_salary" "$july_salary"
     else
         # Print year, corresponding salary scale, and January salary for employee table
-        printf "| %4d |    $%9.2f          |    $%9.2f   |\n" "$year" "$january_salary" "$january_salary"
+        printf "| %4d |    $%9.2f       |    $%9.2f   |\n" "$year" "$january_salary" "$january_salary"
     fi
     
     # Increment January and July salaries
@@ -61,8 +61,8 @@ for (( year=current_year; year<current_year+num_points; year++ )); do
     july_salary=$(bc <<< "scale=2; $july_salary + $increment")
 done
 
-# Print footer indicating the author with padding spaces
-echo "+-------------------------------------------------------------------+"
-echo "|       Salary Scale Table program by Dylan Boyle                   |"
-echo "+-------------------------------------------------------------------+"
+# Print footer 
+echo "+---------------------------------------------------------------+"
+echo "|       Salary Scale Table program by Dylan Boyle               |"
+echo "+---------------------------------------------------------------+"
 
