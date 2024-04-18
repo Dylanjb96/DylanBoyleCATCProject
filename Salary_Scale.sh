@@ -1,4 +1,5 @@
-#!/bin/bashi
+#!/bin/bash
+
 
 # Function to print a line separator
 print_separator() {
@@ -33,5 +34,7 @@ for (( year=current_year; year<current_year+num_points; year++ )); do
 done
 
 # Print footer
-print_separator
+echo "+---------------------------------------+"
+echo "| Salary Scale Table program by Dylan Boyle |"
+echo "+---------------------------------------+"
 
