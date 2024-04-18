@@ -1,9 +1,13 @@
 #!/bin/bash
 
-
 # Function to print a line separator
 print_separator() {
     printf "+------+-----------------------+\n"
+}
+
+# Function to print table header with spaces
+print_header() {
+    printf "| Year |    Salary Scale        |\n"
 }
 
 # Prompt the user to enter starting salary, number of points, and salary increment
@@ -21,8 +25,10 @@ else
     increments_per_year=1
 fi
 
-# Print header for the salary scale table
-echo "Year | Salary Scale"
+# Print table header with spaces
+print_separator
+print_header
+print_separator
 
 # Calculate and display salary scales for each year
 current_year=$(date +%Y)
@@ -30,11 +36,10 @@ for (( year=current_year; year<current_year+num_points; year++ )); do
     # Calculate salary for the current year
     salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year")
     # Print year and corresponding salary scale
-    printf "%4d | $%.2f\n" "$year" "$salary"
+    printf "| %4d |    $%9.2f          |\n" "$year" "$salary"
 done
 
-# Print footer
+# Print footer indicating the author with padding spaces
 echo "+---------------------------------------+"
-echo "| Salary Scale Table program by Dylan Boyle |"
+echo "|       Salary Scale Table program by Dylan Boyle       |"
 echo "+---------------------------------------+"
-
