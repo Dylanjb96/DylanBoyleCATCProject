@@ -17,3 +17,13 @@ fi
 
 # Print header for the salary scale table
 echo "Year | Salary Scale"
+
+# Calculate and display salary scales for each year
+current_year=$(date +%Y)
+for (( year=current_year; year<current_year+num_points; year++ )); do
+    # Calculate salary for the current year
+    salary=$(bc <<< "scale=2; $starting_salary + ($year - $current_year) * $increment * $increments_per_year")
+    # Print year and corresponding salary scale
+    printf "%4d | $%.2f\n" "$year" "$salary"
+done
+
